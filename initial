@@ -1,0 +1,62 @@
+import pygame
+import sys
+
+# Initialize pygame
+pygame.init()
+
+# Screen dimensions (similar to a mobile screen)
+SCREEN_WIDTH = 360
+SCREEN_HEIGHT = 640
+
+# Colors
+WHITE = (255, 255, 255)
+BLACK = (0, 0, 0)
+GRAY = (169, 169, 169)
+
+# Set up the display
+screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
+pygame.display.set_caption("Mobile Screen")
+
+# Draw the UI elements
+def draw_ui():
+    screen.fill(WHITE)
+    
+    # Draw a header
+    pygame.draw.rect(screen, GRAY, (0, 0, SCREEN_WIDTH, 50))
+    
+    # Draw some buttons
+    pygame.draw.rect(screen, BLACK, (50, 100, 100, 50))
+    pygame.draw.rect(screen, BLACK, (200, 100, 100, 50))
+    
+    # Draw a bottom navigation bar
+    pygame.draw.rect(screen, GRAY, (0, SCREEN_HEIGHT - 50, SCREEN_WIDTH, 50))
+    
+    # Draw button text
+    font = pygame.font.Font(None, 36)
+    button_text1 = font.render('Button 1', True, WHITE)
+    button_text2 = font.render('Button 2', True, WHITE)
+    screen.blit(button_text1, (65, 115))
+    screen.blit(button_text2, (215, 115))
+
+# Main loop
+def main():
+    clock = pygame.time.Clock()
+    running = True
+
+    while running:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                running = False
+            elif event.type == pygame.MOUSEBUTTONDOWN:
+                pos = pygame.mouse.get_pos()
+                print(f"Mouse clicked at: {pos}")
+
+        draw_ui()
+        pygame.display.flip()
+        clock.tick(60)
+
+    pygame.quit()
+    sys.exit()
+
+if __name__ == "__main__":
+    main()
